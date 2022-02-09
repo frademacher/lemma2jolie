@@ -53,9 +53,9 @@ class GenerationModule extends AbstractCodeGenerationModule {
      */
     private def generateContext(Context context) {
         '''
-        //beginCtx(«context.name»)
+        ///@beginCtx(«context.name»)
             «context.complexTypes.map[it.generateComplexType].join("\n")»
-        //endCtx
+        ///@endCtx
         '''
     }
 
@@ -95,7 +95,7 @@ class GenerationModule extends AbstractCodeGenerationModule {
     private def generateFeatures(List<String> featureLiterals) {
         '''
         «FOR l : featureLiterals»
-            //«l.generateFeature»
+            ///@«l.generateFeature»
         «ENDFOR»
         '''
     }

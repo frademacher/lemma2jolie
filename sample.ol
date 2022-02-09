@@ -1,16 +1,16 @@
-//beginCtx(ChargingStationManagement)
-    //aggregate
-    //entity
+///@beginCtx(ChargingStationManagement)
+    ///@aggregate
+    ///@entity
     type ParkingArea {
-        //identifier
+        ///@identifier
         id: long
         ownerId: long
         name: string
         description: string
-        //part
+        ///@part
         location: Location
         parkingSpaceCount: int
-        //part
+        ///@part
         availability: TimePeriods
         pricePerHour: double
         pricePerKwh: double
@@ -22,8 +22,8 @@
         createdDate: string
         lastModifiedDate: string
     }
-    //aggregate
-    //entity
+    ///@aggregate
+    ///@entity
     type toParkingAreaInformation_type {
         self? ParkingArea
     }
@@ -32,13 +32,13 @@
             toParkingAreaInformation(toParkingAreaInformation_type)(ParkingAreaInformation)
     }
     
-    //valueObject
+    ///@valueObject
     type Location {
         latitude: double
         longitude: double
     }
     
-    //valueObject
+    ///@valueObject
     type TimePeriod {
         start: string
         end: string
@@ -52,7 +52,7 @@
         literal: string(enum(["FAST", "NORMAL"]))
     }
     
-    //factory
+    ///@factory
     type fromParkingAreaInformation_type {
         info: ParkingAreaInformation
         self? ParkingAreaFactory
@@ -62,7 +62,7 @@
             fromParkingAreaInformation(fromParkingAreaInformation_type)(ParkingArea)
     }
     
-    //repository
+    ///@repository
     type ParkingAreaRepository {
         managedParkingAreas: ParkingAreas
     }
@@ -71,12 +71,12 @@
         p*: ParkingArea
     }
     
-    //valueObject
+    ///@valueObject
     type CreateParkingAreaCommand {
         info: ParkingAreaInformation
     }
     
-    //valueObject
+    ///@valueObject
     type ParkingAreaInformation {
         ownerId: long
         name: string
@@ -97,28 +97,28 @@
         i*: ParkingAreaInformation
     }
     
-    //domainEvent
-    //valueObject
+    ///@domainEvent
+    ///@valueObject
     type ParkingAreaCreatedEvent {
         parkingAreaId: long
         info: ParkingAreaInformation
     }
     
-    //valueObject
+    ///@valueObject
     type UpdateParkingAreaCommand {
         info: ParkingAreaInformation
     }
     
-    //domainEvent
-    //valueObject
+    ///@domainEvent
+    ///@valueObject
     type ParkingAreaUpdatedEvent {
         parkingAreaId: long
         info: ParkingAreaInformation
     }
     
-    //domainEvent
-    //valueObject
+    ///@domainEvent
+    ///@valueObject
     type ParkingAreaDeletedEvent {
         parkingAreaId: long
     }
-//endCtx
+///@endCtx
