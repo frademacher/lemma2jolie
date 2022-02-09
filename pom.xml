@@ -1,0 +1,110 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>lemma2jolie</groupId>
+    <artifactId>lemma2jolie</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>LEMMA2Jolie Generator</name>
+    <description>A LEMMA code generator for the Jolie microservice programming language.</description>
+
+    <properties>
+        <groovy-version>3.0.9</groovy-version>
+        <java.version>11</java.version>
+        <lemma-version>0.8.5-SNAPSHOT</lemma-version>
+        <maven-assembly-plugin-version>3.3.0</maven-assembly-plugin-version>
+        <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <xtend-version>2.25.0</xtend-version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+        <dependency>
+            <groupId>de.fhdo.lemma.data.datadsl</groupId>
+            <artifactId>de.fhdo.lemma.data.datadsl</artifactId>
+            <version>${lemma-version}</version>
+            <classifier>all-dependencies</classifier>
+        </dependency>
+        <dependency>
+            <groupId>de.fhdo.lemma.model_processing</groupId>
+            <artifactId>de.fhdo.lemma.model_processing</artifactId>
+            <version>${lemma-version}</version>
+            <classifier>all-dependencies</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-jsr223</artifactId>
+            <version>${groovy-version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.xtend</groupId>
+            <artifactId>org.eclipse.xtend.lib</artifactId>
+            <version>${xtend-version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/lemma2jolie</sourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.eclipse.xtend</groupId>
+                <artifactId>xtend-maven-plugin</artifactId>
+                <version>${xtend-version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/xtend-gen/main</outputDirectory>
+                            <testOutputDirectory>${project.build.directory}/xtend-gen/test</testOutputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin-version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+              <artifactId>maven-assembly-plugin</artifactId>
+              <version>${maven-assembly-plugin-version}</version>
+              <configuration>
+               <appendAssemblyId>false</appendAssemblyId>
+                <finalName>lemma2jolie</finalName>
+                <archive>
+                  <manifest>
+                    <mainClass>lemma2jolie.Lemma2Jolie</mainClass>
+                  </manifest>
+                </archive>
+                <descriptors>
+                    <descriptor>assembly.xml</descriptor>
+                </descriptors>
+              </configuration>
+              <executions>
+                <execution>
+                  <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                  <phase>package</phase> <!-- bind to the packaging phase -->
+                  <goals>
+                    <goal>single</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+          </plugins>
+    </build>
+</project>

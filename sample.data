@@ -1,0 +1,89 @@
+context ChargingStationManagement {
+    structure ParkingArea<aggregate, entity> {
+        long id<identifier>,
+        long ownerId,
+        string name,
+        string description,
+        Location location<part>,
+        // Instead of ParkingSpaceSize
+        int parkingSpaceCount,
+        TimePeriods availability<part>,
+        float pricePerHour,
+        float pricePerKwh,
+        ChargerSpeed chargerSpeed,
+        string plugType,
+        boolean activated,
+        boolean blocked,
+        boolean offered,
+        immutable date createdDate,
+        date lastModifiedDate,
+        function ParkingAreaInformation toParkingAreaInformation
+    }
+
+    structure Location<valueObject> {
+        double latitude,
+        double longitude
+    }
+
+    structure TimePeriod<valueObject> {
+        date start,
+        date end
+    }
+
+    collection TimePeriods { TimePeriod p }
+
+    enum ChargerSpeed {
+        FAST,
+        NORMAL
+    }
+
+    structure ParkingAreaFactory<factory> {
+        function ParkingArea fromParkingAreaInformation(ParkingAreaInformation info)
+    }
+
+    structure ParkingAreaRepository<repository> {
+        ParkingAreas managedParkingAreas
+    }
+
+    collection ParkingAreas { ParkingArea p }
+
+    structure CreateParkingAreaCommand<valueObject> {
+        immutable ParkingAreaInformation info
+    }
+
+    structure ParkingAreaInformation<valueObject> {
+        immutable long ownerId,
+        immutable string name,
+        immutable string description,
+        immutable Location location,
+        immutable int parkingSpaceCount,
+        immutable TimePeriods availability,
+        immutable float pricePerHour,
+        immutable float pricePerKwh,
+        immutable boolean activated,
+        immutable boolean blocked,
+        immutable boolean offered,
+        immutable ChargerSpeed chargerSpeed,
+        immutable string plugType
+    }
+
+    collection ParkingAreaInformationList { ParkingAreaInformation i }
+
+    structure ParkingAreaCreatedEvent<domainEvent, valueObject> {
+        long parkingAreaId,
+        immutable ParkingAreaInformation info
+    }
+
+    structure UpdateParkingAreaCommand<valueObject> {
+        immutable ParkingAreaInformation info
+    }
+
+    structure ParkingAreaUpdatedEvent<domainEvent, valueObject> {
+        long parkingAreaId,
+        immutable ParkingAreaInformation info
+    }
+
+    structure ParkingAreaDeletedEvent<domainEvent, valueObject> {
+        long parkingAreaId
+    }
+}

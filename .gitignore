@@ -1,0 +1,13 @@
+.metadata/
+bin/
+.launch/
+target/
+.gradle/
+out/
+.idea/
+.~lock*
+*.iml
+*.hprof
+.DS_Store
+__pycache__/
+xtend-gen/
