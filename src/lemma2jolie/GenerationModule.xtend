@@ -54,7 +54,7 @@ class GenerationModule extends AbstractCodeGenerationModule {
     private def generateContext(Context context) {
         '''
         ///@beginCtx(«context.name»)
-            «context.complexTypes.map[it.generateComplexType].join("\n")»
+        «context.complexTypes.map[it.generateComplexType].join("\n")»
         ///@endCtx
         '''
     }
