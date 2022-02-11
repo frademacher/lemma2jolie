@@ -162,7 +162,7 @@ class GenerationModule extends AbstractCodeGenerationModule {
         ««« of the structure before the operation parameter types. In case the structure also
         ««« contains, the generateType(DataStructure) encoding function will already have taken care
         ««« of the features.
-        «IF !structuresWithGeneratedFeatures.contains(structure)»
+        «IF !structuresWithGeneratedFeatures.contains(structure.buildQualifiedName("."))»
             «structure.features.map[it.literal].generateFeatures»
         «ENDIF»
         «FOR o : structure.operations»

@@ -22,8 +22,6 @@ type ParkingArea {
     createdDate: string
     lastModifiedDate: string
 }
-///@aggregate
-///@entity
 type toParkingAreaInformation_type {
     self? ParkingArea
 }
