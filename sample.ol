@@ -30,8 +30,8 @@ type ParkingSpace {
     location: Location
     parkingSpaceCount: int
     availability: TimeSlots
-    pricePerHour: double
-    pricePerKwh: double
+    priceInEuroPerHour: double
+    priceInEuroPerKwh: double
     chargerSpeed: ChargerSpeed
     plugType: string
     activated: bool
@@ -72,7 +72,7 @@ type create_type {
     d: Driver
     p: ParkingSpace
     t: TimeSlot
-    price: double
+    priceInEuro: double
 }
 interface ParkingSpaceBookingFactory_interface {
     RequestResponse:
@@ -94,6 +94,6 @@ type ParkingSpaceBookingVO {
     driver: string
     parkingSpace: long
     timeSlot: TimeSlot
-    price: double
+    priceInEuro: double
 }
 ///@endCtx

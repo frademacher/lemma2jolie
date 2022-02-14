@@ -16,8 +16,8 @@ context BookingManagement {
         Location location,
         int parkingSpaceCount,
         TimeSlots availability,
-        float pricePerHour,
-        float pricePerKwh,
+        float priceInEuroPerHour,
+        float priceInEuroPerKwh,
         ChargerSpeed chargerSpeed,
         string plugType,
         boolean activated,
@@ -49,7 +49,8 @@ context BookingManagement {
     }
 
     structure ParkingSpaceBookingFactory<factory> {
-        function ParkingSpaceBooking create(Driver d, ParkingSpace p, TimeSlot t, double price)
+        function ParkingSpaceBooking create(Driver d, ParkingSpace p, TimeSlot t,
+            double priceInEuro)
     }
 
     structure BookingExpiration<specification> {
@@ -60,6 +61,6 @@ context BookingManagement {
         immutable string driver,
         immutable long parkingSpace,
         immutable TimeSlot timeSlot,
-        immutable double price
+        immutable double priceInEuro
     }
 }
