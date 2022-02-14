@@ -76,8 +76,7 @@ class GenerationModule extends AbstractCodeGenerationModule {
      * Encode a LEMMA data structure as a Jolie type
      */
     private def generateType(DataStructure structure) {
-        // Prevent empty types
-        if (structure.dataFields.empty)
+        if (!structure.requiresGeneratedType)
             return ""
 
         // Tell the generator that we will encode the features of this structure
@@ -87,6 +86,14 @@ class GenerationModule extends AbstractCodeGenerationModule {
         «structure.features.map[it.literal].generateFeatures»
         «generateTypeFromFields(structure.name, structure.dataFields)»
         '''
+    }
+
+    /**
+     * Check if a data structure requires a type to get generated
+     */
+    private def requiresGeneratedType(DataStructure structure) {
+        // Prevent empty types
+        return !structure.dataFields.empty
     }
 
     /**
@@ -186,7 +193,9 @@ class GenerationModule extends AbstractCodeGenerationModule {
             «FOR p : operation.parameters»
                 «p.name»: «p.complexType?.name ?: p.primitiveType.typeName.generatePrimitiveType»
             «ENDFOR»
-            self? «operation.dataStructure.name»
+            «IF operation.dataStructure.requiresGeneratedType»
+                self?: «operation.dataStructure.name»
+            «ENDIF»
         }
         '''
     }

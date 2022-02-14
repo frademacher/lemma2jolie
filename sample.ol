@@ -10,7 +10,14 @@ type ParkingSpaceBooking {
     driver: Driver
     ///@part
     timeSlot: TimeSlot
-    price: double
+    priceInEuro: double
+}
+type priceInDollars_type {
+    self?: ParkingSpaceBooking
+}
+interface ParkingSpaceBooking_interface {
+    RequestResponse:
+        priceInDollars(priceInDollars_type)(double)
 }
 
 ///@entity
@@ -66,7 +73,6 @@ type create_type {
     p: ParkingSpace
     t: TimeSlot
     price: double
-    self? ParkingSpaceBookingFactory
 }
 interface ParkingSpaceBookingFactory_interface {
     RequestResponse:
@@ -76,7 +82,6 @@ interface ParkingSpaceBookingFactory_interface {
 ///@specification
 type isExpired_type {
     b: ParkingSpaceBooking
-    self? BookingExpiration
 }
 interface BookingExpiration_interface {
     RequestResponse:

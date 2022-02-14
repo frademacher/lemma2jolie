@@ -4,7 +4,8 @@ context BookingManagement {
         ParkingSpace parkingSpace<part>,
         Driver driver<part>,
         TimeSlot timeSlot<part>,
-        double price
+        double priceInEuro,
+        function double priceInDollars
     }
 
     structure ParkingSpace<entity> {
