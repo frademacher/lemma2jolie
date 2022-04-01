@@ -12,4 +12,4 @@ WORKDIR $workdir
 RUN chmod +x install.sh
 RUN ./install.sh
 
-ENTRYPOINT ["java", "-jar", "./target/lemma2jolie.jar"]
+ENTRYPOINT ["java", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "-jar", "/usr/local/lemma2jolie/target/lemma2jolie.jar"]
