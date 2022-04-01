@@ -177,7 +177,7 @@ class GenerationModule extends AbstractCodeGenerationModule {
         «ENDFOR»
         interface «structure.name»_interface {
             RequestResponse:
-                «FOR o : structure.operations»
+                «FOR o : structure.operations SEPARATOR ","»
                     «o.generateOperation»
                 «ENDFOR»
         }
