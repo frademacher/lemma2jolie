@@ -3,7 +3,6 @@ bin/
 .launch/
 target/
 .gradle/
-out/
 .idea/
 .~lock*
 *.iml
