@@ -39,7 +39,7 @@ context BookingManagement {
         NORMAL
     }
 
-    structure Driver<entity> {
+    structure Driver<valueObject> {
         string id<identifier>
     }
 
